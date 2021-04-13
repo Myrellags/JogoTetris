@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace JogoTetris
@@ -18,6 +19,16 @@ namespace JogoTetris
         public List<Block> Blocks
         {
             get { return _blocks; }
+        }
+
+        //declarando um evento
+        public event EventHandler Refresh;
+        private void OnRefresh(object sender, EventArgs e)
+        {
+            if(this.Refresh != null)
+            {
+                this.Refresh(sender, e);
+            }
         }
         public Board()
         {
@@ -66,6 +77,7 @@ namespace JogoTetris
             {
                 _blocks[index].Col = x;
             }
+            Refresh(this, null);
         }
         public void Down()
         {
@@ -109,6 +121,13 @@ namespace JogoTetris
                         check[check.IndexOf(b)].Filled = true;
                     }
                 }
+            }
+
+            OnRefresh(this, null);
+            if(this.HasBlocksToClear())
+            {
+                Thread.Sleep(100);
+                this.ClearComplete();
             }
         }
 

@@ -23,7 +23,6 @@ namespace JogoTetris
         {
             timer1.Enabled = false;
             board.LeftRight(MoveType.Left);
-            MyRefresh();
             timer1.Enabled = true;
         }
 
@@ -31,11 +30,10 @@ namespace JogoTetris
         {
             timer1.Enabled = false;
             board.LeftRight(MoveType.Right);
-            MyRefresh();
             timer1.Enabled = true;
         }
 
-        private void MyRefresh()
+        private void MyRefresh(object sender, EventArgs e)
         {
             pictureBox1.Image = null;
             pictureBox1.Update();
@@ -59,15 +57,7 @@ namespace JogoTetris
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            timer1.Interval = 1000;
             board.Down();
-            MyRefresh();
-            if (board.HasBlocksToClear())
-            {
-                Thread.Sleep(100);
-                board.ClearComplete();
-                MyRefresh();
-            }
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -75,12 +65,10 @@ namespace JogoTetris
             timer1.Enabled = false;
             timer1.Interval = 1;
             board.Down();
-            MyRefresh();
             if (board.HasBlocksToClear())
             {
                 Thread.Sleep(100);
                 board.ClearComplete();
-                MyRefresh();
             }
             timer1.Enabled = true;
         }
@@ -88,6 +76,11 @@ namespace JogoTetris
         private void button1_Click(object sender, EventArgs e)
         {
             timer1.Enabled = true;
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            board.Refresh += new EventHandler(MyRefresh);
         }
     }
 }
