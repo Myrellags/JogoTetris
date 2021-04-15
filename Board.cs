@@ -12,27 +12,105 @@ namespace JogoTetris
         Left,
         Right
     }
-    class Board
+    public class Board
     {
         List<Block> _blocks = new List<Block>();
         List<Block> _blockstoclear = new List<Block>();
+
         public List<Block> Blocks
         {
             get { return _blocks; }
         }
 
-        //declarando um evento
         public event EventHandler Refresh;
+
         private void OnRefresh(object sender, EventArgs e)
         {
-            if(this.Refresh != null)
+            //Null check makes sure the main page is attached to the event
+            if (this.Refresh != null)
             {
                 this.Refresh(sender, e);
             }
         }
+
+        //public event EventHandler Refresh;
+        //public void OnRefresh()
+        //{
+        //    EventHandler handler = Refresh;
+        //    if (null != handler) handler(this, EventArgs.Empty);
+        //    if (this.Refresh != null)
+        //    {
+        //        this.Refresh(sender, e);
+        //    }
+
+        //}
+
+        //public event EventHandler ClearBlocks;
+        //public void OnClearBlocks()
+        //{
+        //    EventHandler handler = ClearBlocks;
+        //    if (null != handler) handler(this, EventArgs.Empty);
+        //}
+
         public Board()
         {
             Block block = new Block(1, 5);
+            _blocks.Add(block);
+        }
+
+        public void OrangeRicky()//  __|
+        {
+            Block block = new Block(2, 5);
+            _blocks.Add(block);
+            block = new Block(2, 6);
+            _blocks.Add(block);
+            block = new Block(2, 7);
+            _blocks.Add(block);
+            block = new Block(1, 7);
+            _blocks.Add(block);
+        }
+
+        public void BlueRicky()//  |__
+        {
+            Block block = new Block(1, 5);
+            _blocks.Add(block);
+            block = new Block(2, 5);
+            _blocks.Add(block);
+            block = new Block(2, 6);
+            _blocks.Add(block);
+            block = new Block(2, 7);
+            _blocks.Add(block);
+        }
+
+        public void ClevelandZ()//  -|_
+        {
+
+        }
+
+        public void RhodeIslandZ()//  _|-
+        {
+
+        }
+
+        public void Hero()//  ______
+        {
+
+        }
+
+        public void Teewee()//  _|_
+        {
+
+        }
+
+        public void Smashboy()//  □□
+        {                     //  □□
+            Block block = new Block(1, 5);
+            _blocks.Add(block);
+            block = new Block(1, 6);
+            _blocks.Add(block);
+            block = new Block(2, 5);
+            _blocks.Add(block);
+            block = new Block(2, 6);
             _blocks.Add(block);
         }
         public void LeftRight(MoveType move)
@@ -77,6 +155,8 @@ namespace JogoTetris
             {
                 _blocks[index].Col = x;
             }
+
+            // Raise the event.
             Refresh(this, null);
         }
         public void Down()
@@ -110,6 +190,8 @@ namespace JogoTetris
                 _blocks[index].Row = y;
             }
 
+
+
             // agora verificar se existem linhas totalmente preenchidas
             for (int i = 1; i <= 15; i++)
             {
@@ -123,12 +205,16 @@ namespace JogoTetris
                 }
             }
 
-            OnRefresh(this, null);
-            if(this.HasBlocksToClear())
+            // Raise the event.
+            Refresh(this, null);
+
+            if (HasBlocksToClear())
             {
                 Thread.Sleep(100);
-                this.ClearComplete();
+                ClearComplete();
+                Refresh(this, null);
             }
+
         }
 
         public Boolean HasBlocksToClear()

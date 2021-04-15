@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace JogoTetris
 {
-    class Block
+    public class Block
     {
         private Guid _id;
         private int _col;
