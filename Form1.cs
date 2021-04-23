@@ -49,8 +49,10 @@ namespace JogoTetris
                 }
                 else
                 {
-               
                     //g.DrawRectangle(new Pen(Color.Red, 2f), b.Col * 20, b.Row * 20, 20, 20);
+                    board.OrangeRicky();//criando a peça no array
+                    //armazenar as posições sos dados da peça em variáveis??
+                    //utilizar estas variáveis e subustituir dentro do drawRectangle abaixo??
                     g.DrawRectangle(new Pen(Color.Red, 2f), b.Col * 20, b.Row * 20, 40, 20);
                     g.DrawRectangle(new Pen(Color.Blue, 2f), b.Col * 20, b.Row * 20, 20, 40);
                     g.DrawRectangle(new Pen(Color.Green, 2f), b.Col * 20, b.Row * 20, 40, 20);
@@ -136,31 +138,31 @@ namespace JogoTetris
             {
                 case 1:
                     button5.Text = "Orange Ricky";   //  __|
-                    OrangeRicky();
+                    board.OrangeRicky();
                     break;
                 case 2:
                     button5.Text = "Blue Ricky";     //  |__
-                    BlueRicky();
+                    board.BlueRicky();
                     break;
                 case 3:
                     button5.Text = "Cleveland Z";    //  -|_
-                    ClevelandZ();
+                    board.ClevelandZ();
                     break;
                 case 4:
                     button5.Text = "Rhode Island Z"; //  _|-
-                    RhodeIslandZ();
+                    board.RhodeIslandZ();
                     break;
                 case 5:
                     button5.Text = "Hero";           //  ______
-                    Hero();
+                    board.Hero();
                     break;
                 case 6:
                     button5.Text = "Teewee";         //  _|_
-                    Teewee();
+                    board.Teewee();
                     break;
                 case 7:
                     button5.Text = "Smashboy";       //  []
-                    Smashboy();
+                    board.Smashboy();
                     break;
             }
         }

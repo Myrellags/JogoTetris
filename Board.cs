@@ -58,7 +58,7 @@ namespace JogoTetris
             _blocks.Add(block);
         }
 
-        public void OrangeRicky()//  __|
+        public List<Block> OrangeRicky()//  __|
         {
             Block block = new Block(2, 5);
             _blocks.Add(block);
@@ -68,6 +68,7 @@ namespace JogoTetris
             _blocks.Add(block);
             block = new Block(1, 7);
             _blocks.Add(block);
+            return _blocks;
         }
 
         public void BlueRicky()//  |__
